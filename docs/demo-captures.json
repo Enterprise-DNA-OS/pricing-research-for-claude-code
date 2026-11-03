@@ -1,0 +1,24 @@
+{
+  "captured": "2026-11-03T02:46:29.810Z",
+  "fictional": true,
+  "screens": [
+    {
+      "title": "Know the sample",
+      "ask": "How many responses can we use for this study?",
+      "command": "npm run research -- sample \"--study=Harbour Coffee subscription\"",
+      "output": "name                        | currency | price_unit           | imported | eligible | excluded | min_sample\n----------------------------|----------|----------------------|----------|----------|----------|-----------\nHarbour Coffee subscription | NZD      | monthly subscription | 10       | 8        | 2        | 6"
+    },
+    {
+      "title": "See the price perceptions",
+      "ask": "Does this study point to one price or a range?",
+      "command": "npm run research -- psm \"--study=Harbour Coffee subscription\"",
+      "output": "study                       | segment       | currency | unit                 | sample | metric                 | low | high | status                       \n----------------------------|---------------|----------|----------------------|--------|------------------------|-----|------|------------------------------\nHarbour Coffee subscription | All responses | NZD      | monthly subscription | 8      | marginal cheapness     | 20  | 22   | exploratory price perceptions\nHarbour Coffee subscription | All responses | NZD      | monthly subscription | 8      | marginal expensiveness | 30  | 30   | exploratory price perceptions\nHarbour Coffee subscription | All responses | NZD      | monthly subscription | 8      | extreme balance        | 20  | 30   | exploratory price perceptions\nHarbour Coffee subscription | All responses | NZD      | monthly subscription | 8      | indifference           | 26  | 26   | exploratory price perceptions"
+    },
+    {
+      "title": "Prepare the review",
+      "ask": "Which research work needs attention?",
+      "command": "npm run research -- attention",
+      "output": "study                       | kind         | owner      | item                                                     | due_on    \n----------------------------|--------------|------------|----------------------------------------------------------|-----------\nHarbour Coffee gift box     | access       | Lee Demo   | Access review missing or overdue                         |           \nHarbour Coffee gift box     | notice       | Lee Demo   | Record the research notice or collection basis reference |           \nHarbour Coffee gift box     | retention    | Lee Demo   | Retention review missing or overdue                      |           \nHarbour Coffee gift box     | small-sample | Lee Demo   | Eligible responses below agreed minimum                  |           \nHarbour Coffee subscription | action       | Aroha Demo | Review inconsistent response DEMO-10                     | 2026-11-01\nHarbour Coffee subscription | study-review | Aroha Demo | Harbour Coffee subscription                              | 2026-10-31"
+    }
+  ]
+}

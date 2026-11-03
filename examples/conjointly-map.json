@@ -1,0 +1,15 @@
+{
+  "currency": "NZD",
+  "price_unit": "monthly subscription",
+  "columns": {
+    "respondent_key": "Respondent ID",
+    "segment": "Buyer group",
+    "completed": "Status",
+    "too_cheap": "VW too cheap",
+    "cheap": "VW cheap",
+    "expensive": "VW expensive",
+    "too_expensive": "VW too expensive"
+  },
+  "complete_values": ["Complete"],
+  "incomplete_values": ["Incomplete"]
+}

@@ -1,14 +1,21 @@
 [
   {
     "name": "week",
-    "title": "This week",
-    "subtitle": "Pricing Research for Claude Code: what needs attention, rendered by npm run view",
+    "title": "Pricing research: this week",
     "sections": [
       {
+        "title": "Study coverage",
+        "sql": "select name,currency,price_unit,imported,eligible,excluded,min_sample from v_sample order by name"
+      },
+      {
         "title": "Needs attention",
-        "note": "TODO(author): point this at the industry's attention view (overdue, stuck, quiet).",
-        "sql": "select 'replace me' as item, 'TODO(author)' as why"
+        "sql": "select study,kind,owner,item,due_on from v_attention order by study,kind,item"
+      },
+      {
+        "title": "Research record checks",
+        "sql": "select s.name,c.rule,c.issue from v_compliance c join studies s on s.id=c.study_id order by s.name,c.rule"
       }
-    ]
+    ],
+    "subtitle": "Internal review of saved evidence. Demo records are fictional. Price perceptions are not sales forecasts."
   }
 ]

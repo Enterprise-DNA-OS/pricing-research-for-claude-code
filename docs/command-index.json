@@ -1,0 +1,122 @@
+[
+  {
+    "command": "studies",
+    "cli": "studies"
+  },
+  {
+    "command": "study",
+    "cli": "study"
+  },
+  {
+    "command": "sample-review",
+    "cli": "sample"
+  },
+  {
+    "command": "responses",
+    "cli": "responses"
+  },
+  {
+    "command": "segments",
+    "cli": "segments"
+  },
+  {
+    "command": "price-curves",
+    "cli": "curves"
+  },
+  {
+    "command": "price-sensitivity",
+    "cli": "psm"
+  },
+  {
+    "command": "segment-review",
+    "cli": "segment-review"
+  },
+  {
+    "command": "quality-review",
+    "cli": "quality"
+  },
+  {
+    "command": "attention",
+    "cli": "attention"
+  },
+  {
+    "command": "compliance",
+    "cli": "compliance"
+  },
+  {
+    "command": "actions",
+    "cli": "actions"
+  },
+  {
+    "command": "decision-review",
+    "cli": "decisions"
+  },
+  {
+    "command": "imports",
+    "cli": "imports"
+  },
+  {
+    "command": "history",
+    "cli": "history"
+  },
+  {
+    "command": "add-study",
+    "cli": "add-study"
+  },
+  {
+    "command": "review-study",
+    "cli": "review-study"
+  },
+  {
+    "command": "review-response",
+    "cli": "review-response"
+  },
+  {
+    "command": "add-action",
+    "cli": "add-action"
+  },
+  {
+    "command": "close-action",
+    "cli": "close-action"
+  },
+  {
+    "command": "add-decision",
+    "cli": "add-decision"
+  },
+  {
+    "command": "log",
+    "cli": "log"
+  },
+  {
+    "command": "import",
+    "cli": "import"
+  },
+  {
+    "command": "export",
+    "cli": "export"
+  },
+  {
+    "command": "weekly-review",
+    "cli": null
+  },
+  {
+    "command": "draft-review",
+    "cli": null
+  },
+  {
+    "command": "documents",
+    "cli": null
+  },
+  {
+    "command": "views",
+    "cli": null
+  },
+  {
+    "command": "customise",
+    "cli": null
+  },
+  {
+    "command": "new-view",
+    "cli": null
+  }
+]

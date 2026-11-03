@@ -1,0 +1,4 @@
+Respondent ID,Buyer group,Status,VW too cheap,VW cheap,VW expensive,VW too expensive,Unmapped note
+IMPORT-1,New buyers,Complete,10,20,30,40,Not stored
+IMPORT-2,Existing subscribers,Complete,12,22,32,42,Not stored
+IMPORT-3,New buyers,Incomplete,,,,,Not stored

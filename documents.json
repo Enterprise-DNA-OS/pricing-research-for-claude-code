@@ -1,11 +1,13 @@
 [
-  {
-    "name": "example",
-    "title": "TODO(author): the first document this industry must produce",
-    "for_each": "select gen_random_uuid() as id, 'Example' as name",
-    "file": "name",
-    "sections": [
-      { "title": "Details", "sql": "select 'replace me' as item, $1::text as record_id" }
-    ]
-  }
+ {"name":"study-brief","title":"Pricing research study brief","for_each":"select id,name from studies order by name","file":"name","sections":[
+  {"title":"Study and agreed review rules","layout":"record","sql":"select name,currency,price_unit,owner,purpose,notice_ref,review_due,min_sample from studies where id=$1"},
+  {"title":"Sample reconciliation","sql":"select imported,eligible,excluded,min_sample from v_sample where study_id=$1"},
+  {"title":"Segments","sql":"select segment,imported,eligible,excluded from v_segments where study_id=$1 order by segment"},
+  {"title":"Price perception curves","note":"Percentages describe unweighted eligible responses. An agreed minimum controls summary results. These curves do not forecast demand or profit.","sql":"select price,sample,too_cheap_pct,cheap_pct,expensive_pct,too_expensive_pct from v_curves where study_id=$1 order by price"},
+  {"title":"Follow-up","sql":"select title,owner,due_on,status,closure_evidence from actions where study_id=$1 order by due_on,id"}
+ ]},
+ {"name":"decision-record","title":"Pricing decision record","for_each":"select id,title from decisions order by created_at,id","file":"title","sections":[
+  {"title":"Decision and rationale","layout":"record","sql":"select d.title,d.proposed_price,s.currency,s.price_unit,d.rationale,d.evidence_ref,d.actor,d.review_on from decisions d join studies s on s.id=d.study_id where d.id=$1"},
+  {"title":"Saved analysis at the decision date","note":"Frozen evidence. The proposed price is a human decision, not an automatically optimal price.","sql":"select x->>'metric' as measure,x->>'sample' as sample,x->>'low' as low,x->>'high' as high,x->>'status' as status from decisions d cross join lateral jsonb_array_elements(d.snapshot->'results') x where d.id=$1"}
+ ]}
 ]

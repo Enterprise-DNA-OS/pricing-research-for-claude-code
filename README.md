@@ -1,115 +1,102 @@
-<h1 align="center">Pricing Research for Claude Code</h1>
+# Pricing Research for Claude Code
 
-<p align="center">
-  <strong>The open-source pricing research desk that is just a database and Claude Code.</strong>
-</p>
+Keep price-sensitivity responses, review decisions and follow-up in a database you own. A focused alternative for the exported Van Westendorp research work done in Conjointly.
 
-<p align="center">
-  Created by <a href="https://www.enterprisedna.co"><strong>Enterprise DNA</strong></a>. Free and open source. Works with Claude Code, Codex, OpenCode or Cursor.
-</p>
+Built by Enterprise DNA. MIT licence. Works with Claude Code, Codex, OpenCode or Cursor.
 
-<!-- three-doors -->
-<table align="center">
-  <tr>
-    <td align="center"><strong>Do it yourself</strong><br/>Clone it, run it, own it. Free, MIT.<br/><a href="#quick-start">Quick start</a></td>
-    <td align="center"><strong>We customise it</strong><br/>Your fields, your rules, your Conjointly data brought across.<br/><a href="https://enterprisedna.co/omni/book/?utm_source=github&utm_medium=readme&utm_campaign=conjointly">Book a call</a></td>
-    <td align="center"><strong>We run it for you</strong><br/>Installed, connected and operated inside Omni. Setup fee, then a retainer.<br/><a href="https://enterprisedna.co/omni/instead-of/conjointly?utm_source=github&utm_medium=readme&utm_campaign=conjointly">How it works</a></td>
-  </tr>
-</table>
-
-<p align="center">
-  <a href="#what-is-this">What is this</a> &bull;
-  <a href="#why-no-front-end">Why no front end</a> &bull;
-  <a href="#quick-start">Quick start</a> &bull;
-  <a href="#the-commands">Commands</a> &bull;
-  <a href="#instead-of-conjointly">Instead of Conjointly</a> &bull;
-  <a href="#want-it-installed-and-run-for-you">Installed for you</a> &bull;
-  <a href="#license">License</a>
-</p>
-
-<p align="center">
-  <img src="https://img.shields.io/badge/Node-20+-339933?style=flat-square" alt="Node 20+" />
-  <img src="https://img.shields.io/badge/PostgreSQL-any-336791?style=flat-square" alt="PostgreSQL" />
-  <img src="https://img.shields.io/badge/PGlite-embedded-3ecf8e?style=flat-square" alt="PGlite" />
-  <img src="https://img.shields.io/badge/License-MIT-yellow?style=flat-square" alt="MIT License" />
-</p>
-
----
-
-## What is this
-
-Pricing Research for Claude Code does the job you pay Conjointly for, as a Postgres database and a set of agent commands. There is no web front end. You open the folder in [Claude Code](https://claude.com/claude-code) (or Codex, OpenCode, Cursor: see `AGENTS.md`) and ask for what you want in plain language. It runs the right query, and it can answer questions the Conjointly dashboard cannot.
-
-<!-- TODO(author): the annual bill. One sentence: what a 10 to 50 person business typically pays Conjointly per year, all in, with a source. -->
-
-Want the same thing with a web front end, or built on a different stack? That is a customisation, and it is exactly what Enterprise DNA does: [book a call](https://enterprisedna.co/omni/book/?utm_source=github&utm_medium=readme&utm_campaign=conjointly).
-
-<!-- TODO(author): two or three sentences on what this specific product covers and who it is for. -->
-
-## Why no front end
-
-- The front end was only ever there because the database was hard to talk to. That is no longer true.
-- Your data sits in plain Postgres tables you own. Any tool can read them. No export, no lock-in.
-- No seats, no tiers, no add-ons. Read [docs/why-no-front-end.md](docs/why-no-front-end.md) for the honest trade-offs too.
+| Do it yourself | We customise it | We run it for you |
+|---|---|---|
+| Free. Install the database and commands. | Your research fields, checks and reports. Setup fee, then a retainer for ongoing work. | Installed, connected and operated through Omni by Enterprise DNA. Setup fee, then a retainer. |
+| [Quick start](#quick-start) | [Get your version built](https://enterprisedna.co/omni/book/?offer=replace-software&utm_medium=github&utm_campaign=conjointly) | [Book a call](https://enterprisedna.co/omni/book/?offer=replace-software&utm_medium=github&utm_campaign=conjointly) |
 
 ## Quick start
 
-Sixty seconds, no database install (an embedded Postgres runs inside Node):
+Node 20 or newer. No vendor account or hosted database is needed for the fictional demo.
 
 ```bash
 git clone https://github.com/Enterprise-DNA-OS/pricing-research-for-claude-code.git
 cd pricing-research-for-claude-code
 npm install
 npm run demo
+npm run research -- psm --study="Harbour Coffee subscription"
+npm run view
+npm run docs
 ```
 
-Then open the folder in Claude Code and type a slash command. <!-- TODO(author): name the first command to try. -->
+The demo contains two fictional studies. The subscription study has ten responses: eight eligible, one incomplete and one with inconsistent prices. Its study minimum is six for demonstration. Both segments fall below that minimum, so segment summary results are withheld. The gift-box study has no responses and overdue privacy reviews. Real study thresholds must be chosen by the researcher, not copied from this demo.
 
-### Use it with your own Postgres or Supabase
+Local storage uses PGlite in .data/db. DATABASE_URL selects PostgreSQL. Run npm run migrate on a new database. The scripts use a trusted operator account. Hosted use needs enforced identity, access control, backups and a retention process. Typed actor names provide attribution, not authentication.
 
-Copy `.env.example` to `.env`, set `DATABASE_URL`, then `npm run migrate`. Same commands, shared data, no per-seat fee.
+## The working week
 
-## The commands
+1. `/sample-review` reconciles imported, eligible and excluded responses.
+2. `/price-sensitivity` calculates four curves and their intersections.
+3. `/segment-review` checks each buyer group against the agreed minimum.
+4. `/quality-review` lists incomplete responses, inconsistent answers and review exclusions.
+5. `/decision-review` reads the rationale and frozen evidence behind a proposed price.
 
-<!-- TODO(author): a table of the slash commands in .claude/commands and what each one does. -->
+Use `/weekly-review` to combine the sample, analysis and follow-up into a private review draft. Nothing sends a message or changes a selling price. Thirty slash commands ship with the build. The full list is in [the command index](docs/command-index.json). The one CLI is `npm run research -- help`. Every command accepts --json. Exact names are case insensitive, ID prefixes work, and ambiguous matches list candidates and exit 1.
 
-| Command | What it does |
-|---|---|
-| `/...` | ... |
+## Bring your Conjointly research across
 
-## Instead of Conjointly
+Export the raw responses, then save the Respondents worksheet as UTF-8 CSV if your export is an Excel workbook. Map the respondent key, segment, completion status and four price answers. These columns vary by study, so the import requires an explicit map. The supplied example demonstrates the mapping contract and is not a vendor-generated export.
 
-<!-- TODO(author): how to bring data across from Conjointly; link docs/replace-conjointly.md -->
-
-## Architecture
-
-```
-pricing-research-for-claude-code/
-  CLAUDE.md                 how the operator wants this run (routing table + house rules)
-  AGENTS.md                 the same, for Codex / OpenCode / Cursor / Gemini CLI
-  .claude/commands/         the slash commands
-  scripts/                  the CLI the commands drive
-  scripts/lib/db.mjs        one adapter: DATABASE_URL (pg) or embedded PGlite
-  supabase/migrations/      plain SQL schema
-  supabase/seed.sql         demo data
-  docs/                     the thesis and the migration guide
+```bash
+npm run research -- import conjointly --study="Harbour Coffee subscription" --file=examples/conjointly-respondents.csv --map=examples/conjointly-map.json --expected-count=3 --source-ref="Fictional fixture" --actor="Demo researcher" --dry-run
 ```
 
-## Built for coding agents
+Remove --dry-run to import that fictional example. For real work, use your own file, mapping, independent source row count and operator identity. The import is atomic. Repeating identical evidence adds nothing. Changed answers under the same respondent key are refused. A corrected export goes into a new study. [The switching guide](docs/replace-conjointly.md) explains the boundary.
 
-The database, CLI and command recipes work with Claude Code, Codex, OpenCode or Cursor. Ask your coding agent for a new command and have it implement and test the change against the same records.
+## What the calculations mean
 
-## Contributing
+The base implements unweighted Van Westendorp price-perception analysis. It uses all distinct observed prices, inclusive cumulative counts and piecewise-linear intersections. An interval of equal values remains an interval. Below the study minimum, summary intersections and new pricing decisions are withheld. The curves remain available for exploration and are marked when below the minimum.
 
-Issues and pull requests are welcome. Keep the shape: plain SQL, a small CLI, a slash command per recurring job, no front end.
+The extreme-balance intersection is sometimes called an optimal price point. Here it is called extreme balance because it does not maximise sales, revenue or profit. This base does not run conjoint utility estimation, MaxDiff, Gabor-Granger, purchase-likelihood modelling, respondent recruitment or survey hosting. Scope those requirements before switching. [Method and limitations](docs/method.md).
 
-## Want it installed and run for you?
+## Ten questions to ask
 
-Enterprise DNA installs Pricing Research for Claude Code for your business, migrates your Conjointly data, connects it to the rest of your tools, and runs it for you as part of **Omni**, our managed Command Center. One setup fee, then a monthly retainer.
+These queries work today. They are not claims that Conjointly cannot answer similar questions.
 
-- Book a call: [enterprisedna.co/omni/book](https://enterprisedna.co/omni/book/?offer=replace-software&utm_source=github&utm_medium=readme&utm_campaign=conjointly)
-- Read more: [enterprisedna.co/omni/instead-of/conjointly](https://enterprisedna.co/omni/instead-of/conjointly?utm_source=github&utm_medium=readme&utm_campaign=conjointly)
+1. How many responses actually support this study? `sample`
+2. Which responses failed the review checks? `quality`
+3. Which buyer groups are too small for our agreed analysis? `segment-review`
+4. How does the too-expensive percentage change across observed prices? `curves`
+5. Is the extreme-balance result a point or a range? `psm`
+6. How do eligible counts differ between existing and new buyers? `segments`
+7. Which study reviews and follow-up actions are overdue? `attention`
+8. What evidence supported our proposed price before later exclusions? `decisions`
+9. Which source file, mapping and count produced these responses? `imports`
+10. Who recorded the reviews, notes and decisions? `history`
 
-## License
+Commands that concern one study require --study. Use its ID if a name is ambiguous.
 
-MIT. Copyright (c) 2026 Enterprise DNA.
+## Your first hour: ten things to ask for
+
+1. Put our business name, logo and colours in brand.json.
+2. Register our actual research question and owner.
+3. Set the currency and the unit the price refers to.
+4. Set a researcher-approved minimum sample.
+5. Record the research notice and review dates.
+6. Map the actual exported question columns.
+7. Reconcile the original count with the import preview.
+8. Review inconsistent answers before interpreting curves.
+9. Record a proposed price with its rationale and evidence.
+10. Render our study brief and weekly review.
+
+`/customise` adds fields or changes a rule through a tested migration. `/new-view` adds a read-only report.
+
+## Reports, records and backups
+
+`npm run view` renders views/week.html. `npm run docs` renders study briefs and decision records in docs-out/. Both use brand.json. They are private HTML documents, not a hosted application. [Why no front end](docs/why-no-front-end.md).
+
+Original responses, import evidence, review events, decisions and notes are append-only. A later review does not rewrite a saved decision snapshot. Study review dates and action status can change with an event recorded by the CLI. The database owner can bypass these protections. Privacy erasure requires an authorised administrator procedure covering the database, exports, snapshots and backups.
+
+`npm run research -- export --file=exports/research-backup.json` exports all eight domain record types in one consistent read. It refuses to overwrite a file. Keep native database backups too. JSON restore is not shipped.
+
+`/compliance` flags missing collection references and overdue access or retention reviews. It supports a privacy review; it does not certify legal compliance. [Rules and official sources](docs/compliance.md).
+
+## Validation
+
+`npm test` exercises every CLI command, known mathematical examples, missing and inconsistent responses, repeated imports, changed evidence, sample controls, frozen decisions, ambiguous names, exports and escaped HTML. Tests use temporary local storage. TEST_DATABASE_URL accepts an explicitly disposable empty PostgreSQL database only. [Validation evidence](docs/validation.md).
+
+[Selection and sources](docs/research.md). Built and optionally operated through [Omni by Enterprise DNA](https://enterprisedna.co/omni/instead-of/conjointly?utm_source=github&utm_medium=readme&utm_campaign=conjointly).
