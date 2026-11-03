@@ -6,7 +6,7 @@ import {spawnSync} from 'node:child_process';
 import {getDb,REPO_ROOT} from './lib/db.mjs';
 import {migrate} from './migrate.mjs';
 import {seed} from './seed.mjs';
-import {dispatch,commands,parse} from './research.mjs';
+import {dispatch,commands,parse,printRows} from './research.mjs';
 import {curves,summary,intersection} from './lib/analysis.mjs';
 import {parseCsv} from './lib/csv.mjs';
 const tmp=fs.mkdtempSync(path.join(os.tmpdir(),'pricing-research-'));
@@ -22,6 +22,7 @@ try{
  const study=(await run('study',s))[0];const ps=await run('psm',s);assert(ps.every(r=>r.sample===8&&r.low!==null));
  const sqlCurves=await db.query('select * from v_curves where study_id=$1 order by price',[sid]);const jsCurves=await run('curves',s);
  for(let i=0;i<sqlCurves.length;i++)for(const k of ['too_cheap_pct','cheap_pct','expensive_pct','too_expensive_pct'])assert(Math.abs(Number(sqlCurves[i][k])-jsCurves[i][k])<0.0001);
+ assert(/^\s*-{2,}(\s+-{2,})*\s*$/.test(printRows(await run('sample',s)).split('\n')[1]));
  const golden=Array(4).fill({too_cheap:10,cheap:20,expensive:30,too_expensive:40});
  const gs=summary(golden,{name:'golden',currency:'NZD',price_unit:'unit',min_sample:2});
  assert.deepEqual(gs.map(x=>[x.low,x.high]),[[20,20],[30,30],[20,30],[25,25]]);
